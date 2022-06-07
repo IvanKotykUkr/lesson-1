@@ -2,7 +2,7 @@ import exspress, {Request,Response} from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 const app = exspress()
-const port = 5000
+const port = process.env.PORT || 5000
 
 
 
