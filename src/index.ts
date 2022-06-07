@@ -22,7 +22,7 @@ const videos = [
 ]
 
 app.use('/',(req:Request,res:Response)=>{
-    res.sendFile(path.join(__dirname+'https://github.com/IvanKotykUkr/lesson-1/blob/039f5a11ee82c5fd9faa9c25712ec6dab102f7da/index.html'))
+    res.sendFile(path.join(__dirname + './index.html'))
     }
 
     )
