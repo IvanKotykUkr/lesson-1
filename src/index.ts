@@ -20,6 +20,11 @@ const videos = [
     {id: 5, title: 'About JS - 05', author: 'it-incubator.eu'},
 ]
 
+app.get('/videos',(req:Request,res:Response)=>{
+    res.send('Hello World')
+    }
+
+    )
 
 app.get('/videos',(req:Request,res: Response)=>{
 
