@@ -20,12 +20,10 @@ const videos = [
     {id: 4, title: 'About JS - 04', author: 'it-incubator.eu'},
     {id: 5, title: 'About JS - 05', author: 'it-incubator.eu'},
 ]
-app.use(exspress.static("mondaylesson-01"))
-app.use('/',(req:Request,res:Response)=>{
-    res.sendFile(path.join(__dirname + 'mondaylesson-01/index.html'))
-    }
 
-    )
+app.use('/',(req:Request,res:Response)=>{
+    res.sendFile(path.join(__dirname + '../index.html'))
+    })
 
 app.get('/videos',(req:Request,res: Response)=>{
 
