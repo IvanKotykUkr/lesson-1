@@ -1,4 +1,5 @@
 import exspress, {Request,Response} from "express";
+import path from "path";
 import cors from "cors";
 import bodyParser from "body-parser";
 
@@ -20,8 +21,8 @@ const videos = [
     {id: 5, title: 'About JS - 05', author: 'it-incubator.eu'},
 ]
 
-app.get('/',(req:Request,res:Response)=>{
-    res.send('Hello World')
+app.use('/',(req:Request,res:Response)=>{
+    res.sendFile(path.join(__dirname+'https://github.com/IvanKotykUkr/lesson-1/blob/039f5a11ee82c5fd9faa9c25712ec6dab102f7da/index.html'))
     }
 
     )
