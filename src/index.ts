@@ -1,5 +1,5 @@
 import exspress, {Request,Response} from "express";
-import path from "path";
+
 import cors from "cors";
 import bodyParser from "body-parser";
 
@@ -21,13 +21,16 @@ const videos = [
     {id: 5, title: 'About JS - 05', author: 'it-incubator.eu'},
 ]
 
-app.use('/',(req:Request,res:Response)=>{
-    res.sendFile(path.join(__dirname + '../index.html'))
-    })
+
 
 app.get('/videos',(req:Request,res: Response)=>{
 
-    res.send(videos)
+    res.status(200).send(videos)
+
+})
+app.get('/',(req:Request,res: Response)=>{
+
+    res.send('Hello World')
 
 })
 
@@ -37,7 +40,7 @@ app.get('/videos/:videoId',(req:Request,res:Response)=>{
     if(!video){
         res.sendStatus(404)
     }else {
-        res.json(video)
+        res.send(video)
     }
 
     })
@@ -45,13 +48,25 @@ app.get('/videos/:videoId',(req:Request,res:Response)=>{
 
 
 app.post('/videos', (req: Request, res: Response) => {
+    let title = req.body.title
+    if(!title||typeof title !=='string' || !title.trim() || title.length>40){
+        res.status(400).send({
+            errorsMessages:[{
+               'message':'Incorect title',
+                'field':'title'
+            }],
+            resultCode:1
+        })
+        return
+    }
+
     const newVideo = {
         id: +(new Date()),
         title: req.body.title,
         author: 'it-incubator.eu'
     }
     videos.push(newVideo)
-    res.send(newVideo)
+    res.status(201).send(newVideo)
 })
 app.delete('/videos/:id',(req: Request, res: Response)=>{
     const id = +req.params.id;
@@ -65,14 +80,26 @@ app.delete('/videos/:id',(req: Request, res: Response)=>{
 
 })
 app.put('/videos/:id',(req: Request, res: Response)=>{
+    let title = req.body.title
+    if(!title||typeof title !=='string' || !title.trim() || title.length>40){
+        res.status(400).send({
+            errorsMessages:[{
+                'message':'Incorect title',
+                'field':'title'
+            }],
+            resultCode:1
+        })
+        return
+    }
     const id = +req.params.id;
     const video=videos.find(v => v.id === id)
 
-    if (!video){
-        res.sendStatus(404)
-    } else {
+    if (video){
         video.title = req.body.title
-        res.sendStatus(204)
+        res.sendStatus(204).send(videos)
+
+    } else {
+        res.sendStatus(404)
     }
 })
 
