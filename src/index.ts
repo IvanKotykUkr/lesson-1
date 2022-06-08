@@ -52,10 +52,10 @@ app.post('/videos', (req: Request, res: Response) => {
     if(!title||typeof title !=='string' || !title.trim() || title.length>40){
         res.status(400).send({
             errorsMessages:[{
-               'message':'Incorect title',
-                'field':'title'
+               message :'Incorect title',
+                 field :'title'
             }],
-            resultCode:1
+
         })
         return
     }
@@ -87,7 +87,7 @@ app.put('/videos/:id',(req: Request, res: Response)=>{
                 'message':'Incorect title',
                 'field':'title'
             }],
-            resultCode:1
+
         })
         return
     }
